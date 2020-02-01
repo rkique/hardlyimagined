@@ -5,6 +5,7 @@ Images from various stages of training, collected into a studio piece:
 ![Example results](https://i.imgur.com/MXSJQc3.jpg)
 
 There is also a fun tiling tool I have added. Here's an example Tiling.py result:
+
 ![Example results](https://i.imgur.com/NEecngs.jpg)
 
 # How to use
