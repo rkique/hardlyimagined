@@ -1,7 +1,7 @@
 # hardlyimagined
 256x256 GAN and errata for artificial images. Used with Google Street View images to create exhibition. Based on Matthew Mann's GAN256, with modifications to outputs, save logic, filter count and kernels (9x5 kernels).
 
-![Example results](https://i.imgur.com/NrJXGDS.mp4)
+![Example results](https://i.imgur.com/MXSJQc3.jpg)
 # How to use
 I used Google Colab to host my project but any similar service should work. 
 Make sure you have folders named Sprites, Results, and Models to save progress.
