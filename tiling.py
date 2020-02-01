@@ -10,7 +10,7 @@ import random;
 imagesArray = [];
 boxArray = [];
 leftUpBoundsArray = [];
-#width and height of canvas (final) image
+#width and height of canvas (final) image.
 width = 1024
 height = 1024
 
