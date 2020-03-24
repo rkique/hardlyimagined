@@ -4,7 +4,7 @@
 Images from various stages of training, collected into a studio piece:
 ![Example results](https://i.imgur.com/MXSJQc3.jpg)
 Here's a gif going through model latent space (optimized for smaller viewing)
-![Example results](https://media.giphy.com/media/TIFs0UqBgZkdCRzWrG/giphy.gif)
+![Example results](https://giphy.com/gifs/TIFs0UqBgZkdCRzWrG/html5)
 
 There is also a fun tiling tool I have added. Here's an example Tiling.py result:
 
