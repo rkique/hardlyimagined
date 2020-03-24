@@ -3,11 +3,12 @@
 
 Images from various stages of training, collected into a studio piece:
 ![Example results](https://i.imgur.com/MXSJQc3.jpg)
+Here's a gif going through model latent space (optimized for smaller viewing)
+![Example results](https://media.giphy.com/media/TIFs0UqBgZkdCRzWrG/giphy.gif)
 
 There is also a fun tiling tool I have added. Here's an example Tiling.py result:
 
 ![Example results](https://i.imgur.com/NEecngs.jpg)
-
 # How to use
 I used Google Colab to host my project but any similar service should work. 
 Make sure you have folders named Sprites, Results, and Models to save progress.
