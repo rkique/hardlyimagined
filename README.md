@@ -1,5 +1,5 @@
 # hardlyimagined
-256x256 GAN and errata for the generation of artificial images. Used with Google Street View images to create exhibition. Based on Matthew Mann's GAN256 with modifications to outputs, save logic, filter count and kernel size (9x5 kernels for horizontal landscapes).
+256x256 GAN and errata for the generation of artificial images. Used with Google Street View images to create exhibition. Model architecture based on Matthew Mann's GAN256. Modifications to outputs, save logic, filter count and kernel size (9x5 kernels for horizontal landscapes).
 
 Images from various stages of training, collected into a studio piece:
 ![Example results](https://i.imgur.com/MXSJQc3.jpg)
