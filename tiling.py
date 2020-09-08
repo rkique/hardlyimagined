@@ -3,38 +3,27 @@
 Created on Sat Nov 16 15:08:27 2019
 
 @author: EricX21
-This allows you to create brightness-adjusted collages that match a target image's profile.
 """
 from PIL import Image, ImageStat
+import glob;
 import random;
-imagesArray = [];
-boxArray = [];
-leftUpBoundsArray = [];
-#width and height of canvas (final) image.
-width = 1024
-height = 1024
 
-#vertical (wDivs) and horizontal (hDivs) dividers!
+#number of horizontal tiles
 wDivs = 8;
+#number of vertical tiles
 hDivs = 8;
-wunit = int(width/wDivs);
-hunit = int(height/hDivs);
-
-#Specify the image that you want to replicate the brightness profile for
-GANimage = Image.open("TargetImage.png") 
-
-#Add all collageable images to imagesArray; below is an example for PNGs titled "Screenshot".
-for i in range(180,640):
-    try:
-        imagesArray.append(Image.open("Screenshot ("+str(i)+").png"))
-    except:
-        pass;
+#name your output image here
+savename = "MyFirstCollage"
+#write your pathname pattern here. This example is a relative path specifying all PNGs in the GSVImage subfolder.
+globMatcher = "./GSVImages/*.png"
+#this is the strictness of the brightness match-- higher values give faster, but less accurate matches.
+bScope = 10
 
 def brightness(image):
    im = image.convert('L')
    stat = ImageStat.Stat(im)
    return stat.mean[0]
-   
+
 def brightnessProfile(image, boxArray):
     brightnesses = [];
     for box in boxArray:
@@ -42,35 +31,39 @@ def brightnessProfile(image, boxArray):
         brightnesses.append(brightness(img));
     return brightnesses;
 
+#Image Collection
+imagesArray = [];        
+for infile in glob.glob(globMatcher):
+    try:       
+        imagesArray.append(Image.open(infile))
+    except:
+        pass;
+
+#Size
+size = imagesArray[0].size
+wunit = int(imagesArray[0].width/wDivs);
+hunit = int(imagesArray[0].height/hDivs);
+
+#Crop Boxes
+boxArray = [];
 for i in range(0,wDivs):
     for j in range(0,hDivs):
         boxArray.append([wunit*i,hunit*j,wunit*(i+1), hunit*(j+1)]);
-        leftUpBoundsArray.append((wunit*i,hunit*j))
 
-#creates the collage and saves it to a canvas image.
-canvas = Image.new(mode = "RGBA", size = (width,height))
-bP = brightnessProfile(GANimage, boxArray);
-for i in range(0,wDivs):
-    for j in range(0,hDivs):
-        boxArray.append([500+wunit*i,hunit*j,500+wunit*(i+1), hunit*(j+1)]);
-        leftUpBoundsArray.append((500+wunit*i,hunit*j))
+#Canvas
+canvas = Image.new(mode = "RGBA", size = size)
+
+#brightnessProfile
+bP = brightnessProfile(imagesArray[random.randint(0,len(imagesArray)-1)], boxArray);
+
+#Cropping and Pasting
 for i in range(0,wDivs*hDivs):
     while True:
         choice = random.randint(0,len(imagesArray)-1)
-        img = imagesArray[choice]
-        width, height = img.size   # Get dimensions
-        left = (width - 1024)/2
-        top = (height - 1024)/2
-        right = (width + 1024)/2
-        bottom = (height + 1024)/2
-        img= img.crop((left, top, right, bottom))
-        img = img.crop(boxArray[i]);
-        if abs(brightness(img)-bP[i]) < 10:
+        img = imagesArray[choice].crop(boxArray[i]);
+        if abs(brightness(img)-bP[i]) < bScope:
             break;
-    canvas.paste(img, leftUpBoundsArray[i], img);
-canvas.show();
-#name your canvas image here!
-a="BrightnessProfileCollage"
-canvas.save(a+'.png');
+    canvas.paste(img, tuple(boxArray[i][:2]), img);
+canvas.save(savename+'.png');
 
    
